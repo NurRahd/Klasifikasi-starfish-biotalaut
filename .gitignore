@@ -1,0 +1,39 @@
+# Python environment and cache
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local/editor files
+.vscode/
+.idea/
+.env
+.env.*
+
+# Logs and generated console output
+*.log
+*_output.txt
+
+# Large datasets and generated dataset variants
+biota_laut/
+starfish_only/
+combined_dataset/
+combined_dataset_preprocessed/
+combined_detection_dataset/
+preprocessed_dataset/
+preprocessed_detection_dataset/
+biota_3class_dataset/
+cascade_starfish_dataset/
+label_backups/
+
+# Training and inference outputs
+runs/
+results/
+
+# Downloadable pretrained base models
+yolov8n.pt
+yolo26n.pt
+
+# OS files
+Thumbs.db
+.DS_Store

@@ -1,0 +1,17 @@
+metric,value
+train_images,5490
+valid_images,1107
+test_images,443
+total_objects,16149
+invalid_class_ids,none
+images_without_labels,0
+labels_without_images,0
+empty_label_files,1
+
+class_id,object_count
+0,2819
+1,7123
+2,4417
+3,97
+4,1275
+5,418
