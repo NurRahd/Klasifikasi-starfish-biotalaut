@@ -1,44 +1,44 @@
 # Deploy Web Detection UI
 
-Panduan ini untuk deploy `detection_ui.py` sebagai web app Python.
+Panduan ini untuk deploy web deteksi sebagai aplikasi Streamlit.
 
 ## File penting
 
-- `detection_ui.py` - web server dan UI utama.
+- `streamlit_app.py` - UI Streamlit utama untuk hosting.
+- `detection_ui.py` - helper pipeline dan UI lokal lama.
 - `dual_model_detection_system.py` - pipeline deteksi.
 - `trained_biota_3class_model_best.pt` - model eel/fish/jellyfish.
 - `cascade_model_starfish_best.pt` - model starfish.
-- `requirements.txt` - dependency hosting.
-- `Procfile` - start command untuk hosting Heroku-like.
-- `render.yaml` - konfigurasi Render.
+- `requirements.txt` - dependency hosting Streamlit.
 
-## Deploy ke Render
+## Deploy ke Streamlit Community Cloud
 
 1. Push project ini ke GitHub.
-2. Buka Render, pilih **New +** lalu **Web Service**.
-3. Hubungkan repository GitHub.
-4. Gunakan pengaturan berikut:
-   - Environment: `Python`
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `python detection_ui.py`
-5. Deploy.
+2. Buka <https://share.streamlit.io>.
+3. Pilih **New app**.
+4. Pilih repository `NurRahd/Klasifikasi-starfish-biotalaut`.
+5. Pilih branch `main`.
+6. Isi **Main file path**:
 
-Render akan memberi environment variable `PORT` otomatis. Aplikasi sudah membaca `PORT` dan bind ke `0.0.0.0`, jadi tidak perlu ubah kode lagi.
+```text
+streamlit_app.py
+```
+
+7. Klik **Deploy**.
 
 ## Cek setelah deploy
 
-- Buka URL Render untuk UI.
-- Buka `/healthz` untuk health check sederhana.
+- Buka URL Streamlit yang diberikan.
 - Upload gambar `.jpg`, `.jpeg`, `.png`, `.bmp`, atau `.webp`.
 
 ## Catatan resource
 
-Aplikasi ini menjalankan YOLO/PyTorch di server. Hosting gratis bisa lambat atau gagal karena RAM kecil, terutama saat model pertama kali dimuat. Jika deploy gagal karena memory, gunakan plan dengan RAM lebih besar atau VPS.
+Aplikasi ini menjalankan YOLO/PyTorch di server. Streamlit Community Cloud bisa lambat saat model pertama kali dimuat. Jika deploy gagal karena memory, gunakan platform dengan RAM lebih besar.
 
 ## Jalankan lokal
 
 ```powershell
-.\.venv\Scripts\python.exe detection_ui.py
+.\.venv\Scripts\streamlit.exe run streamlit_app.py
 ```
 
 Lalu buka:

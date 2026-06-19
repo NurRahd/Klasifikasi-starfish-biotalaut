@@ -4,5 +4,5 @@ services:
     env: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python detection_ui.py
+    startCommand: streamlit run streamlit_app.py --server.address 0.0.0.0 --server.port $PORT
     autoDeploy: false
