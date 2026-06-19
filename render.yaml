@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: underwater-detection-ui
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python detection_ui.py
+    autoDeploy: false

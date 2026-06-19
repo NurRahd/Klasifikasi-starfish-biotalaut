@@ -14,6 +14,7 @@ import html
 import csv
 import json
 import mimetypes
+import os
 import sys
 import time
 from dataclasses import dataclass
@@ -41,8 +42,8 @@ from dual_model_detection_system import (
 )
 
 
-HOST = "127.0.0.1"
-PORT = 7860
+HOST = os.environ.get("HOST", "0.0.0.0")
+PORT = int(os.environ.get("PORT", "7860"))
 BASE_DIR = Path(__file__).resolve().parent
 UI_RESULTS_DIR = BASE_DIR / "results" / "ui"
 UPLOAD_DIR = UI_RESULTS_DIR / "uploads"
@@ -1352,6 +1353,10 @@ class DetectionUIHandler(SimpleHTTPRequestHandler):
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
             self.wfile.write(body)
+            return
+
+        if parsed.path == "/healthz":
+            json_response(self, {"ok": True})
             return
 
         if parsed.path.startswith("/result/"):

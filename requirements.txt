@@ -1,0 +1,6 @@
+ultralytics==8.4.60
+opencv-python-headless==4.13.0.92
+numpy
+pandas
+matplotlib
+pillow
