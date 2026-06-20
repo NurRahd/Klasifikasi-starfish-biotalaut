@@ -6,7 +6,9 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from detection_ui import OUTPUT_DIR, UPLOAD_DIR, make_config, run_detection
+BASE_DIR = Path(__file__).resolve().parent
+UPLOAD_DIR = BASE_DIR / "results" / "ui" / "uploads"
+OUTPUT_DIR = BASE_DIR / "results" / "ui" / "outputs"
 
 
 class StreamlitForm:
@@ -39,6 +41,21 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is None:
     st.info("Upload gambar untuk mulai deteksi.")
+    st.stop()
+
+
+@st.cache_resource(show_spinner="Memuat model dan pipeline deteksi...")
+def load_detection_helpers():
+    from detection_ui import make_config, run_detection
+
+    return make_config, run_detection
+
+
+try:
+    make_config, run_detection = load_detection_helpers()
+except ImportError as exc:
+    st.error("Dependency deteksi gagal dimuat di server Streamlit.")
+    st.code(str(exc))
     st.stop()
 
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
